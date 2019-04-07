@@ -65,10 +65,6 @@ namespace {
     const gchar *videoPipeline = "videotestsrc"\
                                  " ! video/x-raw, width=540, height=380"\
                                  " ! glimagesink name=sinkName";
-#if 0
-    struct wl_surface *windowHandle  = nullptr;
-    struct wl_display *displayHandle = nullptr;
-#endif
 }
 
 /* -------------------------------------------------------------------------------------------- */
@@ -78,31 +74,9 @@ namespace {
 static GstBusSyncReply
 busSyncHandler(GstBus *bus, GstMessage *message, gpointer user_data)
 {
-#if 0
-    if (gst_is_wayland_display_handle_need_context_message(message)) {
-        if (displayHandle) {
-            GstContext *context = gst_wayland_display_handle_context_new(displayHandle);
-            gst_element_set_context(GST_ELEMENT(GST_MESSAGE_SRC(message)), context);
-        } else {
-            g_warning("Should have obtained display_handle by now!\n");
-        }
-        gst_message_unref (message);
-        return GST_BUS_DROP;
-    }
-#endif
-
     if (gst_is_video_overlay_prepare_window_handle_message(message)) {
-        //if (windowHandle) {//TODO: Uncomment once set_window_handle() works well!
-            GstVideoOverlay *overlay = GST_VIDEO_OVERLAY(GST_MESSAGE_SRC(message));
-
-#if 0
-            // FIXME: gst_video_overlay_set_window_handle() is used to provide a custom
-            //        window to glimagesink. It is not really needed fr this demo application.
-            gst_video_overlay_set_window_handle (overlay, (guintptr) windowHandle);
-#endif
-            gst_video_overlay_set_render_rectangle(overlay, 0, 0, videoWidth, videoHeight);
-        //}
-
+        GstVideoOverlay *overlay = GST_VIDEO_OVERLAY(GST_MESSAGE_SRC(message));
+        gst_video_overlay_set_render_rectangle(overlay, 0, 0, videoWidth, videoHeight);
         gst_message_unref (message);
         return GST_BUS_DROP;
     }
@@ -134,19 +108,6 @@ int main(int argc, char *argv[])
     app.setApplicationName("application3");
 
     QQmlApplicationEngine engine(QUrl("qrc:///Main.qml"));
-
-#if 0
-    // Get window and display handles. They will be used to tell the glimagesink to use our
-    // custom window instead of the default one.
-    // FIXME: This does not work yet
-    QObject *rootObject              = engine.rootObjects().first();
-    QWindow *window                  = qobject_cast<QWindow*>(rootObject);
-    QPlatformNativeInterface *native = QGuiApplication::platformNativeInterface();
-
-    displayHandle = (struct wl_display *)native->nativeResourceForIntegration("nativedisplay");//TODO: display?
-    windowHandle  = static_cast<struct wl_surface *>(native->nativeResourceForWindow("eglsurface", window));//TODO: surface?
-    qDebug("windowHandle = %p / displayHandle = %p", windowHandle, displayHandle);
-#endif
 
     /* Video pipeline */
     gst_init (&argc, &argv);
