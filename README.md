@@ -5,7 +5,7 @@
 Yet another demo project to show how to implement a wayland compositor using QtWayland. Two main modules:
 - Qt-based wayland compositor that is capable of handling multiple displays on embedded linux
 - Qt quick application that renders output of Gstreamer's glimagesink plugin under Qml
-- A non Qt and non Gstreamer which directly uses EGL and libwayland-client
+- A non Qt and non Gstreamer application which directly uses EGL and libwayland-client to help understanding how the wayland protocol works
 
 ## Why?
 
