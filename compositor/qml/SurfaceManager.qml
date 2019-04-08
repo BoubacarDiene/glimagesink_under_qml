@@ -41,7 +41,7 @@ Item {
      * Creating Qml items is under Streamer.qml's responsibility. That depends on how its
      * users have configured it (E.g. Main.qml).
      */
-    signal surfaceCreated(WaylandSurface surface, string clientId);
+    signal surfaceCreated(WaylandSurface surface, string clientId)
 
     /**
      * WaylandQuickItem is defined inside a Component so that an explicit request is required

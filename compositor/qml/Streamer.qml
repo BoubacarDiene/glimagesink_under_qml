@@ -45,13 +45,9 @@ import com.demo.SurfaceManager 1.0
 Rectangle {
     id: root
 
-    property Rectangle control
-    property Rectangle stream
-
-    // The UI part of the application (buttns, lines, ...)
-    control: Rectangle {
+    // The UI part of the application (buttons, lines, ...)
+    property Rectangle control: Rectangle {
         id: control
-        objectName: ""
         parent: root
 
         width: 640
@@ -71,9 +67,8 @@ Rectangle {
     }
 
     // The video stream rendering occurs here
-    stream: Rectangle {
+    property Rectangle stream: Rectangle {
         id: stream
-        objectName: ""
         parent: root
 
         width: 320
