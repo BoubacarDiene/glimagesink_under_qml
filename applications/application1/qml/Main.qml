@@ -59,7 +59,7 @@ ApplicationWindow {
     
     Text {
         text: "TEXT ON TOP"
-        anchors {horizontalCenter: parent.horizontalCenter; verticalCenter: parent.verticalCenter}
+        anchors.centerIn: parent
         color: "black"
         font.pixelSize: 15
     }

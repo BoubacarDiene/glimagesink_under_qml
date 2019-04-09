@@ -1,4 +1,4 @@
-# Graphics compositing: glimagesink under Qml
+# Graphics compositing with wayland - glimagesink under Qml
 
 ## What?
 
@@ -16,7 +16,7 @@ It contains following components:
 - Sometimes it may be necessary to just separate the main UI from the video part
 - A more concrete Qt Wayland example that can be easily adapted to your needs
 
-- A backup for myself:-)
+- A backup for myself that helps me remember how to do things:-)
 
 ## Note
 

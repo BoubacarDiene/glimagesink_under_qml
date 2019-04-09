@@ -38,16 +38,15 @@ WaylandCompositor {
             width: 740
             height: 530
             visible: true
-            color: "#bbb2ba"
 
             Streamer {
-                control {
-                    objectName: "app-control-ui"
-                    width: parent.width
-                    height: parent.height
-                }
-                stream {objectName: "OpenGL Renderer"; width: 540; height: 380}
+                width: parent.width
+                height: parent.height
                 anchors.centerIn: parent
+                color: "#eeeeee"
+
+                control {objectName: "app-control-ui"}
+                stream {objectName: "OpenGL Renderer"; width: 540; height: 380}
             }
 
             // Enable the following to make the output target an actual screen,
@@ -67,6 +66,7 @@ WaylandCompositor {
             visible: true
 			
             Streamer {
+                id: videoTest
                 stream {
                     objectName: "OpenGL Renderer"
                     width: parent.width

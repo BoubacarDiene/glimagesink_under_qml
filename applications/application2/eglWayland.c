@@ -29,8 +29,8 @@
 *
 * Notes:
 * - The code has not been cleaned up yet
-* - Build: gcc -Wall drmWayland.c -o drmWayland -lwayland-client -lwayland-egl -lEGL -lGLESv2
-* - Run: WAYLAND_DEBUG=1 ./drmWayland
+* - Build: gcc -Wall eglWayland.c -o eglWayland -lwayland-client -lwayland-egl -lEGL -lGLESv2
+* - Run: WAYLAND_DEBUG=1 ./eglWayland
 */
 
 /* -------------------------------------------------------------------------------------------- */

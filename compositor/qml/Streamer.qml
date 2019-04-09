@@ -44,44 +44,62 @@ import com.demo.SurfaceManager 1.0
  */
 Rectangle {
     id: root
+    width: 640
+    height: 480
 
-    // The UI part of the application (buttons, lines, ...)
-    property Rectangle control: Rectangle {
-        id: control
-        parent: root
-
-        width: 640
-        height: 480
-        z: 1
-        anchors.centerIn: parent
-        color: "transparent"
-        visible: objectName != ""
-
-        Connections {
-            target: SurfaceManager
-            onSurfaceCreated: {
-                if (control.objectName != "" && clientId.endsWith(control.objectName))
-                    SurfaceManager.newItem(control, surface, clientId)
-            }
-        }
-    }
-
-    // The video stream rendering occurs here
+    /**
+     * The video stream rendering occurs here
+     *
+     * Notes:
+     * - By default, the background is transparent but that's not mandatory. The "ui"
+     *   part below (i.e "control") is rendered on top of this component and that's
+     *   what's important
+     * - "objectName" is used to identify the wayland client. If not set, this component
+     *   is hidden
+     * - All other attributes can be overriden to position the element where you want
+     */
     property Rectangle stream: Rectangle {
         id: stream
         parent: root
+        visible: objectName != ""
 
-        width: 320
-        height: 240
+        width: parent.width/2
+        height: parent.height/2
         anchors.centerIn: parent
         color: "transparent"
-        visible: objectName != ""
 
         Connections {
             target: SurfaceManager
             onSurfaceCreated: {
                 if (stream.objectName != "" && clientId.endsWith(stream.objectName))
                     SurfaceManager.newItem(stream, surface, clientId)
+            }
+        }
+    }
+
+    /**
+     * The UI part of the application (buttons, lines, ...)
+     *
+     * Notes:
+     * - A transparent background to make above rectangle i.e "stream" visible.
+     *   Please, keep it transparent!
+     * - Except for "objectName" which is used to identify the wayland client,
+     *   it's normally not necessary to set/override other attributes. An empty
+     *   "objectName" means this component has to be hidden
+     */
+    property Rectangle control: Rectangle {
+        id: control
+        parent: root
+        visible: objectName != ""
+
+        anchors.fill: parent
+        color: "transparent"
+
+        Connections {
+            target: SurfaceManager
+            onSurfaceCreated: {
+                if (control.objectName != "" && clientId.endsWith(control.objectName))
+                    SurfaceManager.newItem(control, surface, clientId)
             }
         }
     }
