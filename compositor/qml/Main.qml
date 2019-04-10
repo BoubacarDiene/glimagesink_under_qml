@@ -83,6 +83,19 @@ WaylandCompositor {
         }
     }
 
+    IviApplication {
+        onIviSurfaceCreated: {
+            SurfaceManager.newShellSurface(
+                iviSurface.surface,
+                function(){
+                    return iviSurface.iviId == 1234 ? "app-control-ui"
+                                                    : iviSurface.iviId
+                },
+                function(){return iviSurface.iviIdChanged}
+            )
+        }
+    }
+
     XdgShell {
         onToplevelCreated: {
             SurfaceManager.newShellSurface(

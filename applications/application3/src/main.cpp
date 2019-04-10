@@ -94,7 +94,8 @@ int main(int argc, char *argv[])
 {
     /* Environment variables */
     qputenv("QT_QPA_PLATFORM", "wayland");
-    qputenv("QT_WAYLAND_SHELL_INTEGRATION", "xdg-shell"/*"wl-shell"*/);
+    qputenv("QT_WAYLAND_SHELL_INTEGRATION", "ivi-shell"/*"wl-shell" | "xdg-shell"*/);
+    qputenv("QT_IVI_SURFACE_ID", "1234"); // Only when ivi-shell is used
 
     qputenv("GST_GL_WINDOW", "wayland");
     qputenv("GST_GL_PLATFORM", "egl");
