@@ -43,7 +43,7 @@ WaylandCompositor {
                 width: parent.width
                 height: parent.height
                 anchors.centerIn: parent
-                color: "#eeeeee"
+                color: "blue"
 
                 control {objectName: "app-control-ui"}
                 stream {objectName: "OpenGL Renderer"; width: 540; height: 380}
@@ -86,10 +86,9 @@ WaylandCompositor {
     XdgShell {
         onToplevelCreated: {
             SurfaceManager.newShellSurface(
-                toplevel,
                 xdgSurface.surface,
-                function(){return toplevel.title},
-                function(){return toplevel.titleChanged}
+                function(){return toplevel.title},       // Could be "toplevel.appId"
+                function(){return toplevel.titleChanged} // and "toplevel.appIdChanged"
             )
         }
     }
@@ -97,10 +96,9 @@ WaylandCompositor {
     WlShell {
         onWlShellSurfaceCreated: {
             SurfaceManager.newShellSurface(
-                shellSurface,
                 shellSurface.surface,
-                function(){return shellSurface.title},
-                function(){return shellSurface.titleChanged}
+                function(){return shellSurface.title},       // Could be "shellSurface.className"
+                function(){return shellSurface.titleChanged} // and "shellSurface.classNameChanged"
             )
         }
     }

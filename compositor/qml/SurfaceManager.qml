@@ -73,9 +73,9 @@ Item {
      * to always ensure that the given clientId is set and to bind to the titleChanged
      * event if not.
      */
-    function newShellSurface(shell, surface, clientId, appEvent) {
+    function newShellSurface(surface, clientId, eventToWatch) {
         if (clientId() === "")
-            appEvent().connect(function() {shellSurfaceCreated(surface, clientId())})
+            eventToWatch().connect(function() {shellSurfaceCreated(surface, clientId())})
         else
             shellSurfaceCreated(surface, clientId())
     }

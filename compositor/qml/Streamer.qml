@@ -56,7 +56,7 @@ Rectangle {
      *   what's important
      * - "objectName" is used to identify the wayland client. If not set, this component
      *   is hidden
-     * - All other attributes can be overriden to position the element where you want
+     * - All other attributes can be overriden (to position the element where you want, ...)
      */
     property Rectangle stream: Rectangle {
         id: stream
@@ -85,7 +85,7 @@ Rectangle {
      *   Please, keep it transparent!
      * - Except for "objectName" which is used to identify the wayland client,
      *   it's normally not necessary to set/override other attributes. An empty
-     *   "objectName" means this component has to be hidden
+     *   "objectName" means this component will be hidden
      */
     property Rectangle control: Rectangle {
         id: control

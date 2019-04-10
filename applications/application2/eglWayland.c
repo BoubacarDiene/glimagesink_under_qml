@@ -246,6 +246,7 @@ int main(int argc, char *argv[])
 
     shell_surface = wl_shell_get_shell_surface(shell, surface);
     wl_shell_surface_set_title(shell_surface, "app-control-ui");
+    wl_shell_surface_set_class(shell_surface, "app-control-ui");
     wl_shell_surface_set_toplevel(shell_surface);
 
     create_opaque_region();

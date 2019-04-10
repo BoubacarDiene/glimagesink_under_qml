@@ -62,11 +62,11 @@
 namespace {
     const int videoWidth       = 540;
     const int videoHeight      = 380;
-    //const gchar *videoPipeline = "v4l2src ! glimagesink name=sinkName"; // Use this pipeline to
-                                                                          // stream from your webcam
-    const gchar *videoPipeline = "videotestsrc"\
+    const gchar *videoPipeline = "v4l2src ! glimagesink sync=false"; // Use this pipeline to
+                                                                     // stream from your webcam
+    /*const gchar *videoPipeline = "videotestsrc"\
                                  " ! video/x-raw, width=540, height=380"\
-                                 " ! glimagesink name=sinkName";
+                                 " ! glimagesink sync=false";*/
 }
 
 /* -------------------------------------------------------------------------------------------- */
@@ -74,7 +74,7 @@ namespace {
 /* -------------------------------------------------------------------------------------------- */
 
 static GstBusSyncReply
-busSyncHandler(GstBus *bus, GstMessage *message, gpointer user_data)
+busSyncHandler(GstBus *bus, GstMessage *message, gpointer userData)
 {
     if (gst_is_video_overlay_prepare_window_handle_message(message)) {
         GstVideoOverlay *overlay = GST_VIDEO_OVERLAY(GST_MESSAGE_SRC(message));
@@ -116,9 +116,9 @@ int main(int argc, char *argv[])
 
     GstElement *pipeline = gst_parse_launch(videoPipeline, NULL);
 
-    GstBus *bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
-    gst_bus_set_sync_handler (bus, (GstBusSyncHandler) busSyncHandler, NULL, NULL);
-    gst_object_unref (bus);
+    GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline));
+    gst_bus_set_sync_handler(bus, (GstBusSyncHandler)busSyncHandler, NULL, NULL);
+    gst_object_unref(bus);
 
     gst_element_set_state(pipeline, GST_STATE_PLAYING);
 
